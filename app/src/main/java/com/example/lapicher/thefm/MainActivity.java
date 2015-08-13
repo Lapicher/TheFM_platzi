@@ -5,34 +5,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.lapicher.thefm.ui.HypedArtistsFragment;
+
 
 public class MainActivity extends ActionBarActivity {
+
+    // recomendacion para debuguear.
+    //public static final String LOG_TAG=HypedArtistsFragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        /*
+            Conectar fragmento con actividad
+         */
+        getSupportFragmentManager().beginTransaction()
+                // se añade un fragmento dentro de nuestro contenedor principal
+                .add(R.id.main_container,new HypedArtistsFragment())
+                //.add( se puede agregar otro fragmento siguiendo utilizando el Add)
+                .commit();
     }
 }
