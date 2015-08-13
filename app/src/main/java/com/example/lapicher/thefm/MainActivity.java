@@ -19,12 +19,19 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         /*
-            Conectar fragmento con actividad
+            la pantalla no ha tenido ningun cambio en la pantalla es igual a null.
          */
-        getSupportFragmentManager().beginTransaction()
-                // se añade un fragmento dentro de nuestro contenedor principal
-                .add(R.id.main_container,new HypedArtistsFragment())
-                //.add( se puede agregar otro fragmento siguiendo utilizando el Add)
-                .commit();
+        if (savedInstanceState==null)
+        {
+         /*
+             Conectar fragmento con actividad
+         */
+            getSupportFragmentManager().beginTransaction()
+                    // se añade un fragmento dentro de nuestro contenedor principal
+                    .add(R.id.main_container,new HypedArtistsFragment())
+                            //.add( se puede agregar otro fragmento siguiendo utilizando el Add)
+                    .commit();
+        }
+
     }
 }
