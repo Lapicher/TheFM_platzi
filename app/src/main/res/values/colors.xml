@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#ff1c3357</color> <!-- menu principal -->
+    <color name="accent">#FF4646</color> <!-- menu principal -->
+    <color name="accent_transparency">#cdff4646</color> <!-- menu principal -->
+    <color name="window_background">#394046</color> <!-- fondo principal de la view -->
+    <color name="primary_dark">#37383C</color> <!-- menu de las notificaciones -->
+    <color name="text">#ffeeeeee</color> <!-- color del texto del menu -->
+    <color name="text_secondary">#B6B6B6</color> <!-- menu principal -->
+</resources>
