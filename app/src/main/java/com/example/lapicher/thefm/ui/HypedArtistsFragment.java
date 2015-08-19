@@ -52,6 +52,8 @@ public class HypedArtistsFragment extends Fragment {
     {
         mHypedArtistList.setLayoutManager(new GridLayoutManager(getActivity(),NUM_COLUMNS));
         mHypedArtistList.setAdapter(adapter);
+        // se aplica un espaciado entre cada Card del RecycledView.
+        mHypedArtistList.addItemDecoration(new ItemOffsetDecoration(getActivity(),R.integer.offset));
     }
     private void setDummyContent()
     {
