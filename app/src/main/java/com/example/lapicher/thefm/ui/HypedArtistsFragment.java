@@ -8,17 +8,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.example.lapicher.thefm.R;
 import com.example.lapicher.thefm.domain.Artist;
+import com.example.lapicher.thefm.io.LastFmApiAdapter;
+import com.example.lapicher.thefm.io.model.HypedArtistReponse;
 import com.example.lapicher.thefm.ui.Adapter.HypedArtistAdapter;
 
 import java.util.ArrayList;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 /**
  * Created by GKN on 13/08/2015.
  */
-public class HypedArtistsFragment extends Fragment {
+public class HypedArtistsFragment extends Fragment implements Callback<HypedArtistReponse> {
 
     public static final String LOG_TAG=HypedArtistsFragment.class.getName();
     public static final int NUM_COLUMNS=2;
@@ -30,6 +37,14 @@ public class HypedArtistsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter=new HypedArtistAdapter(getActivity());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LastFmApiAdapter.getApiService()
+                .getHypedArtist(this);
     }
 
     @Nullable
@@ -44,7 +59,8 @@ public class HypedArtistsFragment extends Fragment {
         mHypedArtistList=(RecyclerView)root.findViewById(R.id.hyped_artists_list);
 
         setupArtistsList();
-        setDummyContent();
+
+        //setDummyContent(); Datos dummy ya no seran necesarios.
 
         return root;
     }
@@ -53,7 +69,7 @@ public class HypedArtistsFragment extends Fragment {
         mHypedArtistList.setLayoutManager(new GridLayoutManager(getActivity(),NUM_COLUMNS));
         mHypedArtistList.setAdapter(adapter);
         // se aplica un espaciado entre cada Card del RecycledView.
-        mHypedArtistList.addItemDecoration(new ItemOffsetDecoration(getActivity(),R.integer.offset));
+        mHypedArtistList.addItemDecoration(new ItemOffsetDecoration(getActivity(), R.integer.offset));
     }
     private void setDummyContent()
     {
@@ -63,5 +79,16 @@ public class HypedArtistsFragment extends Fragment {
             artists.add(new Artist("Artist "+i));
         }
         adapter.addAll(artists);
+    }
+
+    @Override
+    public void success(HypedArtistReponse hypedArtistReponse, Response response)
+    {
+        adapter.addAll(hypedArtistReponse.getArtists());
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        error.printStackTrace();
     }
 }
