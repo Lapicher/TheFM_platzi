@@ -24,5 +24,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:21.0.0'
     compile 'com.android.support:cardview-v7:21.0.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.retrofit:retrofit:1.9.0' // retrofit es para conectarse al api de LastFM y obtener los datos de los artistas.
+    compile 'com.squareup.picasso:picasso:2.5.2'   // agregamos la libreria de picasso para el tratamiento de imagenes.
 }

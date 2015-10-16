@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.lapicher.thefm.R;
 import com.example.lapicher.thefm.domain.Artist;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,17 @@ public class HypedArtistAdapter extends RecyclerView.Adapter<HypedArtistAdapter.
     @Override
     public void onBindViewHolder(HypedArtistViewHOlder holder, int position) {
         Artist currentArtist=artists.get(position);
+
+
         holder.setArtistName(currentArtist.getName());
+
+        // OBTENER LAS ULRS DE LOS ARTISTAS Y MOSTRARLAS CON PICASSO.
+        if (currentArtist.getUrlMediumImage()!=null)
+            holder.setArtisImage(currentArtist.getUrlMediumImage());
+            //holder.setArtistDefaultImage();
+        else
+            holder.setArtistDefaultImage();
+
     }
 
     @Override
@@ -50,6 +61,9 @@ public class HypedArtistAdapter extends RecyclerView.Adapter<HypedArtistAdapter.
         this.artists.addAll(arts);
         notifyItemRangeInserted(getItemCount()-1,arts.size());
     }
+
+
+    // CLASE INTERNA
     public class HypedArtistViewHOlder extends RecyclerView.ViewHolder {
 
         TextView artistName;
@@ -63,5 +77,21 @@ public class HypedArtistAdapter extends RecyclerView.Adapter<HypedArtistAdapter.
         {
             artistName.setText(name);
         }
+
+        // cuando tenemos una URL de imagen
+        public void setArtisImage(String url){
+            Picasso.with(contx)
+                    .load(url)
+                    .placeholder(R.drawable.place_holder)
+                    .into(artisImage);
+        }
+        // cuando no tenemos una url de imagen
+        public void setArtistDefaultImage()
+        {
+            Picasso.with(contx)
+                    .load(R.drawable.place_holder)
+                    .into(artisImage);
+        }
     }
+
 }

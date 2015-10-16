@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
              Conectar fragmento con actividad
          */
             getSupportFragmentManager().beginTransaction()
-                    // se añade un fragmento dentro de nuestro contenedor principal
+                    // se anade un fragmento dentro de nuestro contenedor principal
                     .add(R.id.main_container,new HypedArtistsFragment())
                             //.add( se puede agregar otro fragmento siguiendo utilizando el Add)
                     .commit();
